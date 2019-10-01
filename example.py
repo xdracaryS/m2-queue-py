@@ -26,6 +26,7 @@ def StartGame(self):
 # add before 
 
 	def TestTimer(self):
+		global TimerCount
 		if TimerCount != 5: 
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "HALO")
 			TimerCount+=1
