@@ -58,11 +58,7 @@ class Queue(object):
 			if event in self.eventLockedList:
 				continue
 			if app.GetGlobalTimeStamp() > event['run_next_time']:
-				result = 0
-				if event['arguments']:
-					result = apply(event['function'], event['arguments'])
-				else:
-					result = event['function']()
+				result = result = apply(event['function'], event['arguments'])
 				if result == self.EXIT:
 					del self.eventList[index]
 					continue
