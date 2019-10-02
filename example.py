@@ -2,6 +2,9 @@
 # for metin2devs
 # 2.10.2019 00:54
 
+#update
+# 2.10.2019 12:48
+
 # Special thanks for vegaS
 
 #open root/game.py
