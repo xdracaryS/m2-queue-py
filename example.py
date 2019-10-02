@@ -17,8 +17,8 @@ def StartGame(self):
 
 # add before 
 
-	def TestTimer(self):
-		chat.AppendChat(chat.CHAT_TYPE_INFO, "hi this is turkish kebab")
+	def TestTimer(self,level,name):
+		chat.AppendChat(chat.CHAT_TYPE_INFO, "hi this is turkish kebab level=%d name=%s"%(level,name))
 		return 2 # next event time
 
 #######################################
@@ -29,7 +29,7 @@ def StartGame(self):
 
 # add after
 
-event_create.AppendEvent("test",self.TestTimer,2)
+event_create.AppendEvent("test",2,self.TestTimer,(player.GetLevel(),player.GetName()))
 
 ##########################################
 
