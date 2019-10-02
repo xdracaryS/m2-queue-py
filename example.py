@@ -18,12 +18,8 @@ def StartGame(self):
 # add before 
 
 	def TestTimer(self):
-		global TimerCount
-		if TimerCount != 5: 
-			chat.AppendChat(chat.CHAT_TYPE_INFO, "hi this is turkish kebab")
-			TimerCount+=1
-			return 2 # next event time
-		return 0 # clear event <>
+		chat.AppendChat(chat.CHAT_TYPE_INFO, "hi this is turkish kebab")
+		return 2 # next event time
 
 #######################################
 
