@@ -2,20 +2,9 @@
 # for metin2devs
 # 2.10.2019 00:54
 
+# Special thanks for vegaS
 
 #open root/game.py
-
-
-#######################################
-
-# Search
-
-class GameWindow(ui.ScriptWindow):
-
-# add before
-
-Timer = ui.QueuePython()
-TimerCount = 0
 
 #######################################
 
@@ -41,7 +30,7 @@ def StartGame(self):
 
 # add after
 
-Timer.AppendEvent("test",self.TestTimer,2)
+event_create.AppendEvent("test",self.TestTimer,2)
 
 ##########################################
 
@@ -51,7 +40,7 @@ self.interface.BUILD_OnUpdate()
 
 # add after
 
-Timer.Process()
+event_create.Process()
 
 ##########################################
 
