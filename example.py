@@ -5,6 +5,8 @@
 #update
 # 2.10.2019 12:48
 
+#update 10.10.2019 13:55
+
 # Special thanks for vegaS
 
 #open root/game.py
@@ -42,4 +44,24 @@ self.interface.BUILD_OnUpdate()
 event_create.Process()
 
 ##########################################
+
+# vegaS example 
+
+# ex1
+event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventFunc=self.Run)
+# ex2
+event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventFunc=self.Run, eventFuncArgs=player.GetLevel())
+# ex3
+event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventFunc=self.Run, eventFuncArgs=(player.GetLevel(), player.GetName()))
+# ex4
+event_create.AppendEvent('UPDATE', 0, self.Update, {'data' : (1, True, (14, 12), [5, 1], 'Corsair')})
+# Others:
+if event_create.GetEvent('RUN'):
+    print ("The event exists.")
+if event_create.GetIsLockedEvent('RUN'):
+    print ("The event exists but is locked.")
+    
+event_create.LockEvent('RUN')
+event_create.UnlockEvent('RUN')
+event_create.DeleteEvent('RUN')
 
