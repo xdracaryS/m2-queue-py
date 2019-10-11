@@ -2,12 +2,11 @@
 # for metin2devs
 # 2.10.2019 00:54
 
-#update
-# 2.10.2019 12:48
-
+#update 2.10.2019 12:48
 #update 10.10.2019 13:55
+#update 10.10.2019 04:44
 
-# Special thanks for vegaS
+# Special thanks for vegaS & ulubey4242
 
 #open root/game.py
 
@@ -30,8 +29,7 @@ def StartGame(self):
 def StartGame(self):
 
 # add after
-
-event_create.AppendEvent("test",2,self.TestTimer,(player.GetLevel(),player.GetName()))
+event_create.AppendEvent("test",2,10, self.TestTimer,(player.GetLevel(),player.GetName()))
 
 ##########################################
 
@@ -48,11 +46,11 @@ event_create.Process()
 # vegaS example 
 
 # ex1
-event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventFunc=self.Run)
+event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventRunCount=10, eventFunc=self.Run)
 # ex2
-event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventFunc=self.Run, eventFuncArgs=player.GetLevel())
+event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventRunCount=10, eventFunc=self.Run, eventFuncArgs=player.GetLevel())
 # ex3
-event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventFunc=self.Run, eventFuncArgs=(player.GetLevel(), player.GetName()))
+event_create.AppendEvent(eventName='RUN', eventStartTime=0, eventRunCount=10, eventFunc=self.Run, eventFuncArgs=(player.GetLevel(), player.GetName()))
 # ex4
 event_create.AppendEvent('UPDATE', 0, self.Update, {'data' : (1, True, (14, 12), [5, 1], 'Corsair')})
 # Others:
