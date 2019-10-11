@@ -6,7 +6,10 @@
 # 2.10.2019 12:48
 
 # update 10.10.2019
-# Special thanks for vegaS
+
+# update 11.10.2019 04:44
+
+# Special thanks for vegaS & ulubey4242
 
 class Queue(object):
     EXIT = 0
@@ -55,26 +58,43 @@ class Queue(object):
             index = self.eventList.index(event)
             self.eventList[index] = app.GetGlobalTimeStamp()
         
-    def AppendEvent(self, eventName, eventStartTime, eventFunc, eventFuncArgs = ()):
-        """ Append a new event by specific arguments. """
-        if not eventName or not isinstance(eventStartTime, int) or not callable(eventFunc):
+    def AppendEvent(self, eventName, eventStartTime, eventRunCount, eventFunc, eventFuncArgs = ()):
+		""" Append a new event by specific arguments. """
+        if not eventName or not isinstance(eventStartTime, int) or not isinstance(eventRunCount, int) or not callable(eventFunc):
             return
-        if not hasattr(type(eventFuncArgs), '__iter__'):
-            eventFuncArgs = tuple([eventFuncArgs])
-        if self.GetEvent(eventName):
-            self.DeleteEvent(eventName)
-        self.eventList.append({'name' : eventName, 'function' : __mem_func__(eventFunc), 'arguments' : eventFuncArgs, 'run_next_time' : app.GetGlobalTimeStamp() + eventStartTime})
-    def Process(self):
-        """ Processing the events. """
-        for index, event in enumerate(self.eventList):
-            if event in self.eventLockedList:
-                continue
-            if app.GetGlobalTimeStamp() > event['run_next_time']:
-                result = apply(event['function'], event['arguments'])
-                if result in (None, self.EXIT):
-                    del self.eventList[index]
-                    continue
-                event['run_next_time'] = app.GetGlobalTimeStamp() + result
+
+		if self.GetEvent(eventName):
+			self.DeleteEvent(eventName)
+
+		if not hasattr(type(eventFuncArgs), '__iter__'):
+			eventFuncArgs = tuple([eventFuncArgs])
+
+		self.eventDict.update({
+				str(eventName) : {
+					'func' : __mem_func__(eventFunc),
+					'args' : eventFuncArgs,
+					'time' : int(app.GetGlobalTimeStamp() + eventStartTime),
+					'locked' : False,
+					'curr_run_count' : eventRunCount,
+				},
+			})
+
+	def Process(self):
+		""" Processing the events. """
+		for event in self.eventDict:
+			if event['locked']:
+				continue
+
+			if app.GetGlobalTimeStamp() >= event['time']:
+				result = apply(event['func'], event['args'])
+				event['curr_run_count'] -= 1
+
+				if result in (None, self.EXIT) or not event['curr_run_count']:
+					del event
+					continue
+
+				event['time'] = app.GetGlobalTimeStamp() + result
+
 
 event_create = Queue()
 import __builtin__
