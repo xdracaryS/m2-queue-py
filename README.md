@@ -2,5 +2,4 @@
 
 by dracaryS
 
-for metin2devs
 
