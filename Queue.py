@@ -1,5 +1,4 @@
 # dracaryS
-# for metin2devs
 # 2.10.2019 00:54
 
 #update
